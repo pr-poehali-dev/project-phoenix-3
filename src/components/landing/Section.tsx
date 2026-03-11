@@ -15,10 +15,27 @@ const aboutCards = [
   { icon: "Users", title: "Для 7–8 класса", desc: "Программа точно совпадает со школьным курсом" },
 ]
 
+const topicCards = [
+  { icon: "Rocket", title: "Механика", desc: "Движение, силы, законы Ньютона — через спорт и транспорт" },
+  { icon: "Droplets", title: "Жидкости и газы", desc: "Давление, плавание, атмосфера — зачем это знать" },
+  { icon: "Zap", title: "Электричество", desc: "Ток, магнит, цепи — от лампочки до молнии" },
+]
+
+const formatCards = [
+  { icon: "Play", title: "Видеоуроки", desc: "15–20 минут — коротко, ясно, по делу" },
+  { icon: "ClipboardCheck", title: "Задания", desc: "Задачи с подсказками и разбором ошибок" },
+  { icon: "Smartphone", title: "С любого устройства", desc: "Телефон, планшет, компьютер — учись где удобно" },
+]
+
+const cardsMap: Record<string, typeof featureCards> = {
+  features: featureCards,
+  about: aboutCards,
+  topics: topicCards,
+  format: formatCards,
+}
+
 export default function Section({ id, title, subtitle, content, isActive, showButton, buttonText }: SectionProps) {
-  const isFeatures = id === 'features'
-  const isAbout = id === 'about'
-  const cards = isFeatures ? featureCards : isAbout ? aboutCards : null
+  const cards = cardsMap[id] ?? null
 
   return (
     <section id={id} className="relative h-screen w-full snap-start flex flex-col justify-center p-8 md:p-16 lg:p-24">
